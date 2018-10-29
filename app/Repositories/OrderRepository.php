@@ -9,7 +9,22 @@
 namespace App\Repositories;
 
 
+use App\Models\Order;
+
+/**
+ * Class OrderRepository
+ * @package App\Repositories
+ */
 class OrderRepository
 {
 
+    /**
+     * @param bool $all
+     * @param int $limit
+     * @return Order[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getOrders($all = false, $limit = 10)
+    {
+        return $all ? Order::all() : Order::paginate($limit)->get();
+    }
 }
